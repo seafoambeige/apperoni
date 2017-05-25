@@ -11,7 +11,7 @@ export class SchoolMapComponent implements OnInit {
   private start: string;
   private end: string;
 
-  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR);
+  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR);
 
 
 

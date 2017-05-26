@@ -11,7 +11,7 @@ export class SchoolMapComponent implements OnInit {
   private start: string;
   private end: string;
 
-  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR);
+  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR);
 
 
 
@@ -20,10 +20,10 @@ export class SchoolMapComponent implements OnInit {
  //   console.log(this.schoolMap[0].getHeight());
   }
 
-  /*
   private changeStart() {
     const self = this;
-    this.schoolMap.forEach(function(Room){
+    console.log('change start');
+    this.schoolMap.rooms.forEach(function(Room){
       if (Room.name === self.start) {
         Room.setAsStart(true);
       } else {
@@ -35,14 +35,15 @@ export class SchoolMapComponent implements OnInit {
 
   private changeEnd() {
     const self = this;
-    this.schoolMap.forEach(function(Room){
+    console.log('change end');
+    this.schoolMap.rooms.forEach(function(Room){
       if (Room.name === self.end) {
         Room.setAsEnd(true);
       } else {
         Room.setAsEnd(false);
       }
     });
-  }*/
+  }
 
 
   ngOnInit() {

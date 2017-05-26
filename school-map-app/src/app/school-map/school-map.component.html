@@ -2,7 +2,7 @@
   <div>Start: <input (change)="changeStart()" type = "text" [(ngModel)] = "start" /></div>
   <div>End: <input type = "text" (change)="changeEnd()" [(ngModel)] = "end" /></div>
   <div style="position:absolute;top=100;left=0">
-  <div *ngFor="let room of schoolMap">
+  <div *ngFor="let room of schoolMap.rooms">
     <div style="position:absolute;border:solid;" [style.top]="room.getTop()" [style.left]="room.getLeft()"  [style.background-color]="room.isStart() ? 'red' :(room.isEnd() ? 'green' : 'white')" [style.height]="room.getHeight()" [style.width]="room.getWidth()">{{room.name}}</div>
 <!--
     <div>Top:{{room.getTop()}} Left:{{room.getLeft()}}  Height: {{room.getHeight()}} Width:{{room.getWidth()}}</div>x

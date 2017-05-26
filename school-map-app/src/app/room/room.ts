@@ -31,4 +31,11 @@ export class Room {
   setAsEnd(value: boolean): void {
     this.end = value;
   }
+
+  /*public addToGrid(grid: any): void {
+    // loop through each room and that room will add itself to the grid
+  }*/
+
+
+
 }

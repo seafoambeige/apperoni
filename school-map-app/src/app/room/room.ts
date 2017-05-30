@@ -4,6 +4,9 @@
 import {Door} from './door';
 
 export class Room {
+  get doors(): Door[] {
+    return this._doors;
+  }
   get x(): number {
     return this._x;
   }
@@ -20,7 +23,7 @@ export class Room {
   }
   private start = false;
   private end = false;
-  private doors: Door[] = [];
+  private _doors: Door[] = [];
   static createDoor(face: number, position: number, roomX: number, roomY: number, width: number, height: number): Door {
     let x = 0;
     let y = 0;
@@ -42,8 +45,14 @@ export class Room {
     return new Door(x, y, face);
   }
   constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[]) {
-    if(doorInfo.length) {
-      this.doors.push(Room.createDoor(this.doorInfo[0], this.doorInfo[1], _x, _y, _width, _height));
+    if(doorInfo.length===0) {
+      console.log('door info is 0 for ' + name);
+    }
+    if(doorInfo.length%2 === 1) {
+      console.log('odd num in door ary for ' + name);
+    }
+    for(let i = 0; i<doorInfo.length-1; i+=2) {
+      this._doors.push(Room.createDoor(this.doorInfo[i], this.doorInfo[i+1], _x, _y, _width, _height));
     }
  }
 
@@ -68,10 +77,12 @@ export class Room {
     this.end = value;
   }
   setGrid(grid: any) {
-    for(let y = 0; y < this._height; y++) {
-      for (let x = 0; x < this._width; x++) {
-        grid.setWalkableAt(this.x, this.y, false);
-       // console.log('Set walkable false for x = ' + x + ' y = ' + y + '.');
+    console.log('room ' + this.name);
+    console.log('Set walkable false from (' + this._x + ',' + this._y +  ') to (' + + (this._x + this._width - 1) + ',' + (this._y + this._height - 1) + ')');
+
+    for(let y = this._y; y < this._height+this._y; y++) {
+      for (let x = this._x; x < this._width+this._x; x++) {
+        grid.setWalkableAt(x, y, false);
 
       }
     }

@@ -1,0 +1,37 @@
+.start {
+  background-color: red;
+  border-color:lightcoral;
+
+}
+
+.end {
+  background-color: green;
+  border-color: lightgreen;
+}
+
+.room {
+  position:absolute;
+  border:solid;
+}
+
+.door {
+  position:absolute;
+  border:solid;
+  border-width: 1px;
+
+}
+
+.door-color{
+  border-color:white;
+}
+
+.path {
+  position:absolute;
+  background-color: green;
+
+}
+
+.path-node{
+  background-color: green;
+  margin:2px;
+}

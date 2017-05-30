@@ -1,24 +1,27 @@
 <div>
   <div>Start: <input (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
   <div>End: <input type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
+  <button>="showPath()" Show Path</div>
   <div style="position:absolute;top=100px;left=0px">
     <div *ngFor="let room of schoolMap.rooms">
-      <div style="position:absolute;border:solid;" [style.top]="room.getTop(zoomFactor, offSet)"
+      <div class="room" [ngClass]="{'start' : room.isStart(), 'end' : room.isEnd()}"
+           [style.top]="room.getTop(zoomFactor, offSet)"
            [style.left]="room.getLeft(zoomFactor, offSet)"
-           [style.background-color]="room.isStart() ? 'red' :(room.isEnd() ? 'green' : 'white')"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">
         <span style="margin-left:5px; margin-top:5px">{{room.name}}</span>
       </div>
       <div *ngFor="let door of room.doors">
-        <div style="position:absolute;border:solid;border-color:white;" [style.top]="door.getTop(zoomFactor, offSet)"
+        <div  [ngClass]="{'door-color': !room.isStart() && !room.isEnd(), 'start' : room.isStart(), 'end' : room.isEnd()}" class="door"
+             [style.top]="door.getTop(zoomFactor, offSet)"
              [style.left]="door.getLeft(zoomFactor, offSet)" [style.height]="door.getHeight(zoomFactor)"
              [style.width]="door.getWidth(zoomFactor)">
 
         </div>
       </div>
       <div *ngFor="let point of path">
-        <div style="position:absolute;background-color: green;" [style.top]="point.getTop(zoomFactor, offSet)" [style.left]="point.getLeft(zoomFactor,offSet)" [style.width]="point.getWidth(zoomFactor)"
-                   [style.height]="point.getHeight(zoomFactor)">
+        <div class="path" [style.top]="point.getTop(zoomFactor, offSet)" [style.left]="point.getLeft(zoomFactor,offSet)"
+             [style.width]="point.getWidth(zoomFactor)"
+             [style.height]="point.getHeight(zoomFactor)">
         </div>
         <!--<div>Top:{{point.getTop(zoomFactor,offSet)}} Left:{{point.getLeft(zoomFactor,offSet)}}
           Height: {{point.getHeight(zoomFactor)}} Width:{{point.getWidth(zoomFactor)}}</div>-->

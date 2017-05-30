@@ -36,8 +36,10 @@ export class SchoolMapComponent implements OnInit {
     const self = this;
     console.log('change end');
     this.schoolMap.setAsEnd(self.end);
-    this.path = this.schoolMap.getPath();
 
+  }
+  private showPath() {
+    this.path = this.schoolMap.getPath();
   }
 
 

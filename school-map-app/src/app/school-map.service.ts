@@ -95,7 +95,7 @@ export class SchoolMapService {
 
         new Room('Boys BR', 0, 0, 8, 2,[]),
         new Room('girls BR', 0, 2, 8, 2,[]),
-        new Room('workroom', 0, 4, 8, 5,[]),
+        new Room('workroom 1', 0, 4, 8, 5,[2,1,2,3]),
         new Room('412', 0, 9, 8, 4,[2,3]),
         new Room('414', 0, 13, 8, 4,[2,2]),
         new Room('416', 0, 17, 8, 4,[2,3]),
@@ -104,16 +104,16 @@ export class SchoolMapService {
         new Room('422', 0, 29, 8, 4,[2,2]),
         new Room('Storage', 0, 33, 8, 3,[]),
 
-        new Room('stairs', 12, 0, 9, 2,[]),
-        new Room('Workroom', 12, 2, 9, 5,[]),
-        new Room('411', 12, 7, 9, 4,[4,3]),
-        new Room('413', 12, 11, 9, 4,[4,2]),
-        new Room('415', 12, 15, 9, 4,[4,3]),
-        new Room('417', 12, 19, 9, 3,[4,2]),
-        new Room('419', 12, 22, 9, 4,[4,3]),
-        new Room('421', 12, 26, 9, 3,[4,2]),
-        new Room('storage', 12, 29, 9, 3,[]),
-        new Room('stairs', 12, 32, 9, 2,[]),
+        new Room('stairs', 10, 0, 9, 2,[]),
+        new Room('Workroom 2', 10, 2, 9, 5,[]),
+        new Room('411', 10, 7, 9, 4,[4,3]),
+        new Room('413', 10, 11, 9, 4,[4,2]),
+        new Room('415', 10, 15, 9, 4,[4,3]),
+        new Room('417', 10, 19, 9, 3,[4,2]),
+        new Room('419', 10, 22, 9, 4,[4,3]),
+        new Room('421', 10, 26, 9, 3,[4,2]),
+        new Room('storage', 10, 29, 9, 3,[]),
+        new Room('stairs', 10, 32, 9, 2,[]),
       ]);
     }
 }

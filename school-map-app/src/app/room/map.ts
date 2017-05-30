@@ -69,17 +69,54 @@ public setAsStart(roomName: string) {
   }
 
   public getPath(): Point[] {
-    if( this.startRoom == null || this.endRoom == null) {
+    const self = this;
+    if( self.startRoom == null || self.endRoom == null) {
       console.log('tried to get path without start or end.');
       return null;
     }
+    const startDoors = self.startRoom.doors;
+    const endDoors = self.endRoom.doors;
+    if(startDoors.length === 0) {
+      console.log('no start doors');
+      return [];
+    }
+    if(endDoors.length === 0) {
+      console.log('no end doors');
+      return [];
+    }
+
+    let bestPath = [];
+
     const finder = new PF.DijkstraFinder();
-    const path = finder.findPath(9, 0, 11, 32, this.grid);
+
+    startDoors.forEach(function(startDoor){
+      endDoors.forEach(function(endDoor){
+        const startaccesspoint = startDoor.getAccessPoint();
+        const endaccesspoint = endDoor.getAccessPoint();
+        const path = finder.findPath(startaccesspoint.x, startaccesspoint.y, endaccesspoint.x, endaccesspoint.y, self.grid);
+        if(path.length === 0) {
+          console.log('could not find path for access points');
+          console.log(startaccesspoint);
+          console.log(endaccesspoint);
+          console.log(self.grid);
+        } else {
+          console.log('Found path for access points');
+          console.log(startaccesspoint);
+          console.log(endaccesspoint);
+          console.log(path);
+          console.log(self.grid);
+        }
+        if(bestPath.length === 0 || (path.length && path.length<bestPath.length)) {
+          bestPath = path;
+        }
+      });
+    });
+
     const points = [];
-    path.forEach(function(pathItem){
+    bestPath.forEach(function(pathItem){
       points.push(new Point(pathItem[0],pathItem[1]));
     });
-    console.log(path);
+    console.log(bestPath);
     if( !points.length ) {
       console.log('Could not find the path between these rooms');
     }

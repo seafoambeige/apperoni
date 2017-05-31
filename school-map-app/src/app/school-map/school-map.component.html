@@ -1,8 +1,17 @@
 <div>
-  <div>Start: <input (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
-  <div>End: <input type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
-  <button>="showPath()" Show Path</div>
-  <div style="position:absolute;top=100px;left=0px">
+  <div class="app-header">
+    <div class="flex-even app-menu">
+      <div (click)="showDirections()">Directions</div>
+      <div (click)="clearRoute()">Clear Route</div>
+    </div>
+    <div class="direction-box" *ngIf="showDirectionBox">
+      <div>Start: <input (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
+      <div>End: <input type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <button (click)="showPath()">Show Path</button>
+    </div>
+  </div>
+  <div class="map-area" >
     <div *ngFor="let room of schoolMap.rooms">
       <div class="room" [ngClass]="{'start' : room.isStart(), 'end' : room.isEnd()}"
            [style.top]="room.getTop(zoomFactor, offSet)"
@@ -22,9 +31,8 @@
         <div class="path" [style.top]="point.getTop(zoomFactor, offSet)" [style.left]="point.getLeft(zoomFactor,offSet)"
              [style.width]="point.getWidth(zoomFactor)"
              [style.height]="point.getHeight(zoomFactor)">
+          <div class="path-node" ></div>
         </div>
-        <!--<div>Top:{{point.getTop(zoomFactor,offSet)}} Left:{{point.getLeft(zoomFactor,offSet)}}
-          Height: {{point.getHeight(zoomFactor)}} Width:{{point.getWidth(zoomFactor)}}</div>-->
       </div>
     </div>
   </div>

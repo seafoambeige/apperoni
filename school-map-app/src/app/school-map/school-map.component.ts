@@ -14,6 +14,8 @@ export class SchoolMapComponent implements OnInit {
   private zoomFactor = 10;
   private offSet = 10;
   private path = [];
+  private showDirectionBox = false;
+  private error = '';
 
   private schoolMap =  this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR);
 
@@ -27,19 +29,46 @@ export class SchoolMapComponent implements OnInit {
   private changeStart() {
     const self = this;
     console.log('change start');
-    this.schoolMap.setAsStart(self.start);
-
+    const room = this.schoolMap.setAsStart(self.start);
+    if( !room ) {
+      self.error = 'Sorry: ' + self.start + ' is not a valid room';
+    }else {
+      self.error = '';
+    }
 
   }
 
   private changeEnd() {
     const self = this;
     console.log('change end');
-    this.schoolMap.setAsEnd(self.end);
+    const room = this.schoolMap.setAsEnd(self.end);
+    if( !room ) {
+      self.error = 'Sorry: ' + self.end + ' is not a valid room';
+    }else {
+      self.error = '';
+    }
 
   }
-  private showPath() {
+   private showPath() {
+    if( this.error ) return;
     this.path = this.schoolMap.getPath();
+    if( this.path && this.path.length ) {
+      this.showDirectionBox = false;
+    }else {
+      this.error = 'Could not find a path from ' + this.schoolMap.startRoom.name + ' to ' +  this.schoolMap.endRoom.name;
+    }
+  }
+
+  private clearRoute() {
+    this.path = null;
+    this.schoolMap.setAsStart(null);
+    this.schoolMap.setAsEnd(null);
+    this.error = "";
+  }
+
+  private showDirections() {
+    this.showDirectionBox = !this.showDirectionBox;
+
   }
 
 

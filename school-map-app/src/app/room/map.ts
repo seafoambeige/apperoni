@@ -9,6 +9,13 @@ import {Point} from './point';
 declare var PF: any;
 
 export class Map {
+  get startRoom(): Room {
+    return this._startRoom;
+  }
+
+  get endRoom(): Room {
+    return this._endRoom;
+  }
   get height(): number {
     return this._height;
   }
@@ -19,8 +26,8 @@ export class Map {
 private grid: any;
   private _height = 0;
   private _width = 0;
-  private startRoom:Room;
-  private endRoom:Room;
+  private _startRoom:Room;
+  private _endRoom:Room;
   constructor(public name: string, public rooms: [Room]) {
     const self = this;
     rooms.forEach(function(room){
@@ -42,40 +49,48 @@ private grid: any;
 
 
  }
-public setAsStart(roomName: string) {
+public setAsStart(roomName: string):Room {
     const self = this;
-  self.startRoom = null;
+  self._startRoom = null;
+  if( !roomName ) {
+    self._startRoom = null;
+  }
   self.rooms.forEach(function (Room) {
     if (Room.name === roomName) {
       Room.setAsStart(true);
-      self.startRoom = Room;
+      self._startRoom = Room;
     } else {
       Room.setAsStart(false);
     }
   });
+  return self._startRoom;
 }
 
   public setAsEnd(roomName: string) {
     const self = this;
-    self.endRoom = null;
+    self._endRoom = null;
+    if( !roomName ) {
+      self._endRoom = null;
+    }
     self.rooms.forEach(function (Room) {
       if (Room.name === roomName) {
         Room.setAsEnd(true);
-        self.endRoom = Room;
+        self._endRoom = Room;
       } else {
         Room.setAsEnd(false);
       }
     });
+    return self._endRoom;
   }
 
   public getPath(): Point[] {
     const self = this;
-    if( self.startRoom == null || self.endRoom == null) {
+    if( self._startRoom == null || self._endRoom == null) {
       console.log('tried to get path without start or end.');
       return null;
     }
-    const startDoors = self.startRoom.doors;
-    const endDoors = self.endRoom.doors;
+    const startDoors = self._startRoom.doors;
+    const endDoors = self._endRoom.doors;
     if(startDoors.length === 0) {
       console.log('no start doors');
       return [];
@@ -89,11 +104,14 @@ public setAsStart(roomName: string) {
 
     const finder = new PF.DijkstraFinder();
 
+
+
     startDoors.forEach(function(startDoor){
       endDoors.forEach(function(endDoor){
         const startaccesspoint = startDoor.getAccessPoint();
         const endaccesspoint = endDoor.getAccessPoint();
-        const path = finder.findPath(startaccesspoint.x, startaccesspoint.y, endaccesspoint.x, endaccesspoint.y, self.grid);
+        const gridBackup = self.grid.clone();
+        const path = finder.findPath(startaccesspoint.x, startaccesspoint.y, endaccesspoint.x, endaccesspoint.y, gridBackup);
         if(path.length === 0) {
           console.log('could not find path for access points');
           console.log(startaccesspoint);

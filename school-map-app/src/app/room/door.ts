@@ -14,12 +14,14 @@ export class Door {
     return String((this.x * zoomFactor) + offSet ) + 'px';
   }
   getHeight(zoomFactor: number): string {
-    return String((this.face % 2 ? 0 : 1) * zoomFactor) + 'px';
+    const tmp = (this.face % 2 ? 0 : 1) * zoomFactor;
+    return String(tmp ? tmp  : 0) + 'px';
   }
   getWidth(zoomFactor: number): string {
-    return String((this.face % 2 ? 1 : 0) * zoomFactor) + 'px';
+    const tmp = (this.face % 2 ? 1 : 0) * zoomFactor;
+    return String( tmp ? tmp : 0 ) + 'px';
   }
-  getAccessPoint(): Point{
+  getAccessPoint(): Point {
     if(this.face === 2 || this.face === 3) {
       return new Point(this.x, this.y);
     }else if(this.face === 1) {

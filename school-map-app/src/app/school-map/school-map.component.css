@@ -51,7 +51,19 @@ body {
 
 .room {
   position:absolute;
+  font-size:10px;
+}
+
+.normal-room{
   border:solid;border-width: 1px;
+
+}
+
+.walkable-room{
+  border:dotted;
+  border-width: 1px;
+  border-color: gray;
+
 }
 
 .door {

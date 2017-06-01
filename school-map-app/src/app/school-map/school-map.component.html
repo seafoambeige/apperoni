@@ -13,7 +13,7 @@
   </div>
   <div class="map-area" >
     <div *ngFor="let room of schoolMap.rooms">
-      <div class="room" [ngClass]="{'start' : room.isStart(), 'end' : room.isEnd()}"
+      <div class="room" [ngClass]="getRoomClass(room)"
            [style.top]="room.getTop(zoomFactor, offSet)"
            [style.left]="room.getLeft(zoomFactor, offSet)"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">

@@ -17,7 +17,7 @@ export class SchoolMapComponent implements OnInit {
   private showDirectionBox = false;
   private error = '';
 
-  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR);
+  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR);
 
 
 
@@ -69,6 +69,25 @@ export class SchoolMapComponent implements OnInit {
   private showDirections() {
     this.showDirectionBox = !this.showDirectionBox;
 
+  }
+
+  private getRoomClass(room) {
+    let classes = '';
+
+    if( room.roomType === 'Normal') {
+      classes += ' normal-room';
+    }
+    if( room.roomType === 'Walkable') {
+      classes  +=  ' walkable-room';
+    }
+    if( room.isStart() ) {
+       classes += ' start';
+    }
+    if( room.isEnd() ) {
+      classes += ' end';
+    }
+
+    return classes;
   }
 
 

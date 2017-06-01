@@ -44,7 +44,7 @@ export class Room {
     }
     return new Door(x, y, face);
   }
-  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[]) {
+  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[], private roomType: string) {
     if(doorInfo.length===0) {
       console.log('door info is 0 for ' + name);
     }
@@ -80,6 +80,9 @@ export class Room {
     console.log('room ' + this.name);
     console.log('Set walkable false from (' + this._x + ',' + this._y +  ') to (' + + (this._x + this._width - 1) + ',' + (this._y + this._height - 1) + ')');
 
+    if( this.roomType === 'Walkable') {
+      return;  // walkable rooms don't block passage
+    }
     for(let y = this._y; y < this._height+this._y; y++) {
       for (let x = this._x; x < this._width+this._x; x++) {
         grid.setWalkableAt(x, y, false);

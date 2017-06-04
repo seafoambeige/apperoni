@@ -1,39 +1,34 @@
 <div>
   <div class="app-header">
     <div class="flex-even app-menu">
-      <div class="m-l-sm" (click)="showDirections()">Directions</div>
-      <div class="m-r-sm" (click)="clearRoute()">Clear Route</div>
+      <div (click)="showDirections()">Directions</div>
+      <div (click)="clearRoute()">Clear Route</div>
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">
-      <div class="direction-fields p-l-sm p-t-sm p-r-sm">
-        <div class="m-b-xs">Start: <input class="form-control" (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
-        <div>End: <input class="form-control" type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
-        <div *ngIf="error" class="error">{{ error }}</div>
-      </div>
-      <div class="clearfix m-t-sm m-b-sm">
-        <div class="pull-right btn btn-primary m-r-sm" (click)="showPath()">Show Path</div>
-      </div>
-
+      <div>Start: <input (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
+      <div>End: <input type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
+      <div *ngIf="error" class="error">{{ error }}</div>
+      <button (click)="showPath()">Show Path</button>
     </div>
   </div>
-  <div class="map-area" (click)="hideDirections()">
+  <div class="map-area" >
     <div *ngFor="let room of schoolMap.rooms">
       <div class="room" [ngClass]="getRoomClass(room)"
-           [style.top]="room.getTop(zoomFactor, yOffSet)"
-           [style.left]="room.getLeft(zoomFactor, xOffSet)"
+           [style.top]="room.getTop(zoomFactor, offSet)"
+           [style.left]="room.getLeft(zoomFactor, offSet)"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">
-        <span [ngClass]="{'big-room-name': room.height > 5, 'small-room-name': room.height <= 5 }"> {{room.name}}</span>
+        <span style="margin-left:5px; margin-top:5px">{{room.name}}</span>
       </div>
       <div *ngFor="let door of room.doors">
         <div  [ngClass]="{'door-color': !room.isStart() && !room.isEnd(), 'start' : room.isStart(), 'end' : room.isEnd()}" class="door"
-             [style.top]="door.getTop(zoomFactor, yOffSet)"
-             [style.left]="door.getLeft(zoomFactor, xOffSet)" [style.height]="door.getHeight(zoomFactor)"
+             [style.top]="door.getTop(zoomFactor, offSet)"
+             [style.left]="door.getLeft(zoomFactor, offSet)" [style.height]="door.getHeight(zoomFactor)"
              [style.width]="door.getWidth(zoomFactor)">
 
         </div>
       </div>
       <div *ngFor="let point of path">
-        <div class="path" [style.top]="point.getTop(zoomFactor, yOffSet)" [style.left]="point.getLeft(zoomFactor,xOffSet)"
+        <div class="path" [style.top]="point.getTop(zoomFactor, offSet)" [style.left]="point.getLeft(zoomFactor,offSet)"
              [style.width]="point.getWidth(zoomFactor)"
              [style.height]="point.getHeight(zoomFactor)">
           <div class="path-node" ></div>

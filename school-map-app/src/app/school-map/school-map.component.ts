@@ -12,10 +12,7 @@ export class SchoolMapComponent implements OnInit {
   private start: string;
   private end: string;
   private zoomFactor = 10;
-
-  private xOffSet = 20;
-  private yOffSet = 40;
-
+  private offSet = 10;
   private path = [];
   private showDirectionBox = false;
   private error = '';
@@ -53,9 +50,7 @@ export class SchoolMapComponent implements OnInit {
 
   }
    private showPath() {
-    if ( this.error ) {
-      return;
-    }
+    if( this.error ) return;
     this.path = this.schoolMap.getPath();
     if( this.path && this.path.length ) {
       this.showDirectionBox = false;
@@ -68,16 +63,12 @@ export class SchoolMapComponent implements OnInit {
     this.path = null;
     this.schoolMap.setAsStart(null);
     this.schoolMap.setAsEnd(null);
-    this.error = '';
+    this.error = "";
   }
 
   private showDirections() {
     this.showDirectionBox = !this.showDirectionBox;
 
-  }
-
-  private hideDirections() {
-    this.showDirectionBox = false;
   }
 
   private getRoomClass(room) {

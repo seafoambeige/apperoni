@@ -11,7 +11,7 @@ export class SchoolMapComponent implements OnInit {
   // name, x, y, width, height
   private start: string;
   private end: string;
-  private zoomFactor = 10;
+  private zoomFactor = 15;
 
   private xOffSet = 20;
   private yOffSet = 40;

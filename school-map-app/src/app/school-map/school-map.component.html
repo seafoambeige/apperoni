@@ -2,7 +2,7 @@
   <div class="app-header">
     <div class="flex-even app-menu">
       <div (click)="showDirections()">Directions</div>
-      <div (click)="changeFloor()">{{floorName}}</div>
+      <div (click)="changeFloor()">{{floorName}}<span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></div>
       <div  (click)="clearRoute()">Clear Route</div>
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">

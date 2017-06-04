@@ -8,7 +8,7 @@ import {Point} from './point';
 
 declare var PF: any;
 
-export class Map {
+export class SchoolMap {
   get startRoom(): Room {
     return this._startRoom;
   }
@@ -28,6 +28,8 @@ private grid: any;
   private _width = 0;
   private _startRoom:Room;
   private _endRoom:Room;
+  private roomNames = [];
+
   constructor(public name: string, public rooms: [Room]) {
     const self = this;
     rooms.forEach(function(room){
@@ -44,7 +46,10 @@ private grid: any;
     console.log('Grid is ' + self._width + ' wide and ' + self._height + ' high.');
     rooms.forEach(function(room){
       room.setGrid(self.grid);
+      self.roomNames.push(room.name);
     });
+
+    self.roomNames.sort();
 
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Room} from './room/room';
-import {Map} from './room/map';
+import {SchoolMap} from './room/map';
 
 
 
@@ -11,9 +11,9 @@ export class SchoolMapService {
   public static FIRST_FLOOR = 1;
   public static  SECOND_FLOOR = 2;
   constructor() { }
-  public getMap( floorNum: number): Map {
+  public getMap( floorNum: number): SchoolMap {
     if ( floorNum === SchoolMapService.FIRST_FLOOR ) {
-      return new Map('1st Floor', [
+      return new SchoolMap('1st Floor', [
 
 
         new Room('mech3', 0, 4, 13, 9,[2,3],'Normal'),
@@ -51,6 +51,11 @@ export class SchoolMapService {
         new Room('Media Center', 71, 64, 17, 15,[],'Normal'),
         new Room('Attendance', 84, 81, 7, 4,[],'Normal'),
         new Room('Main Office', 69, 80, 7, 6,[],'Normal'),
+        new Room('Guidance', 90, 57, 12, 12,[],'Normal'),
+        new Room('Special Services', 90, 69, 10, 12,[],'Normal'),
+        new Room('Outside', 102, 55, 11, 1,[],'Outside,HideWall-23'),
+
+
 
         new Room('Lecture Hall 501', 33, 54, 11, 4,[],'Normal'),
         new Room('Lecture Hall 502', 16, 54, 11, 4,[],'Normal'),
@@ -58,22 +63,19 @@ export class SchoolMapService {
 
         new Room('Auxillary Gym', 66, 43, 26, 10,[1,1,1,26,3,1,3,26],'Normal'),
 
-
         new Room('Courtyard3', 47, 55, 10, 12,[],'Normal'),
-        new Room('126', 57, 55, 12, 4,[],'Normal'),
-        new Room('124', 57, 59, 12, 4,[],'Normal'),
-        new Room('122', 57, 63, 12, 4,[],'Normal'),
+        new Room('126', 57, 55, 12, 4,[2,4],'Normal'),
+        new Room('124', 57, 59, 12, 4,[2,3],'Normal'),
+        new Room('122', 57, 63, 12, 4,[2,4],'Normal'),
 
         new Room('Band Lockers', 1, 67, 6, 4,[1,4],'Normal'),
         new Room('Band Office', 9, 67, 5, 3,[4,3],'Normal'),
         new Room('Band Room', 1, 58, 12, 9,[1,1,1,9],'Normal'),
         new Room('Choral Room', 25, 77, 15, 6,[1,1,1,14],'Normal'),
         new Room('Courtyard2', 47, 68, 10, 10,[],'Normal'),
-        new Room('Guidance', 90, 57, 12, 5,[],'Normal'),
         new Room('Orchestra', 0, 74, 12, 9,[4,6,2,2],'Normal'),
         new Room('Piano Room', 1, 53, 10, 5,[2,1,3,8],'Normal'),
         new Room('Sm. Ensemble Room', 16, 80, 6, 3,[1,1],'Normal'),
-        new Room('Special Services', 90, 69, 10, 5,[],'Normal'),
         new Room('Stage', 16, 71, 28, 5,[4,5,3,2,2,1],'Normal'),
 
         new Room('Courtyard1', 51, 18, 7, 23,[],'Normal'),
@@ -111,7 +113,6 @@ export class SchoolMapService {
         new Room('264', 75, 14, 8, 4,[3,8],'Normal'),
         new Room('288', 75, 11, 15, 3,[4,2],'Normal'),
         new Room('MDF2', 97, 15, 3, 3,[1,1],'Normal'),
-
 
         new Room('204', 121, 14, 8, 3,[2,1,2,2],'Normal'),
         new Room('205', 121, 11, 8, 3,[2,1],'Normal'),
@@ -169,10 +170,17 @@ export class SchoolMapService {
 
 
 
+
+
+
+
+
+
+
       ]);
     }else {
 
-      return new Map ('2nd Floor', [
+      return new SchoolMap ('2nd Floor', [
 
         new Room('Boys BR', 0, 0, 8, 2,[],'Normal'),
         new Room('girls BR', 0, 2, 8, 2,[],'Normal'),

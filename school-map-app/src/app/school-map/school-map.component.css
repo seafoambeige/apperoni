@@ -411,6 +411,32 @@ body {
 
 }
 
+.outside-room{
+  border:solid;
+  border-width:1px;
+  color:white;
+  border-color:black;
+}
+
+.hide-wall-1{
+  border-top:none;
+}
+
+.hide-wall-2{
+  border-right:none;
+}
+
+.hide-wall-3{
+  border-bottom:none;
+}
+
+.hide-wall-4{
+  border-left:none;
+}
+
+
+
+
 . small-room-name{
   position:relative;
   top:5px;

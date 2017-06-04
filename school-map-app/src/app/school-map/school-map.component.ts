@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
 import {SchoolMapService} from '../school-map.service';
+import {Room} from '../room/room';
+
 import {Point} from '../room/point';
+
+
 
 @Component({
   selector: 'app-school-map',
@@ -29,11 +33,11 @@ export class SchoolMapComponent implements OnInit {
     //   console.log(this.schoolMap[0].getHeight());
   }
 
-  private changeStart() {
+  private changeStart(room:Room) {
     const self = this;
     console.log('change start');
-    const room = this.schoolMap.setAsStart(self.start);
-    if( !room ) {
+    const validRoom = this.schoolMap.setAsStart(room.name);
+    if( !validRoom ) {
       self.error = 'Sorry: ' + self.start + ' is not a valid room';
     }else {
       self.error = '';
@@ -41,11 +45,11 @@ export class SchoolMapComponent implements OnInit {
 
   }
 
-  private changeEnd() {
+  private changeEnd(room:Room) {
     const self = this;
     console.log('change end');
-    const room = this.schoolMap.setAsEnd(self.end);
-    if( !room ) {
+    const validRoom = this.schoolMap.setAsEnd(room.name);
+    if( !validRoom ) {
       self.error = 'Sorry: ' + self.end + ' is not a valid room';
     }else {
       self.error = '';
@@ -83,12 +87,25 @@ export class SchoolMapComponent implements OnInit {
   private getRoomClass(room) {
     let classes = '';
 
-    if( room.roomType === 'Normal') {
-      classes += ' normal-room';
-    }
-    if( room.roomType === 'Walkable') {
-      classes  +=  ' walkable-room';
-    }
+    const roomTypes = room.roomType.split(',');
+    roomTypes.forEach(function(roomType){
+      if( roomType === 'Normal') {
+        classes += ' normal-room';
+      }
+      if( roomType === 'Walkable') {
+        classes  +=  ' walkable-room';
+      }
+      if( roomType === 'Outside') {
+        classes += 'outside-room';
+      }
+      const regExp = /(HideWalls-)([1]*)([2]*)([3]*)([4]*)/;
+      if( roomType.match(regExp) ) {
+        classes += 'hide-wall-1';
+      }
+    });
+
+
+
     if( room.isStart() ) {
       classes += ' start';
     }

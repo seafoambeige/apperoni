@@ -6,8 +6,9 @@
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">
       <div class="direction-fields p-l-sm p-t-sm p-r-sm">
-        <div class="m-b-xs">Start: <input class="form-control" (change)="changeStart()" type="text" [(ngModel)]="start"/></div>
-        <div>End: <input class="form-control" type="text" (change)="changeEnd()" [(ngModel)]="end"/></div>
+        <div class="m-b-xs">Start: <app-room-typeahead [map]="schoolMap"  (onSelectRoom)="changeStart($event)"></app-room-typeahead></div>
+        <div>End: <app-room-typeahead [map]="schoolMap"  (onSelectRoom)="changeEnd($event)"></app-room-typeahead></div>
+
         <div *ngIf="error" class="error">{{ error }}</div>
       </div>
       <div class="clearfix m-t-sm m-b-sm">

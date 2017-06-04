@@ -1,6 +1,2 @@
-<ng-template #rt let-r="result" let-t="term">
-  {{ r.name}}
-</ng-template>
-
   <input type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultFormatter]="formatter" [inputFormatter]="formatter"
-         (selectItem)="roomSelected($event)" [resultTemplate]="rt" placeholder="Select a room" />
+         (selectItem)="roomSelected($event)" placeholder="Select a room" />

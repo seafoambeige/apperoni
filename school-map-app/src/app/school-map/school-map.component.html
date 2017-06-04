@@ -1,8 +1,9 @@
 <div>
   <div class="app-header">
     <div class="flex-even app-menu">
-      <div class="m-l-sm" (click)="showDirections()">Directions</div>
-      <div class="m-r-sm" (click)="clearRoute()">Clear Route</div>
+      <div (click)="showDirections()">Directions</div>
+      <div (click)="changeFloor()">{{floorName}}</div>
+      <div  (click)="clearRoute()">Clear Route</div>
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">
       <div class="direction-fields p-l-sm p-t-sm p-r-sm">

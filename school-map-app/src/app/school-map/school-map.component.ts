@@ -3,6 +3,7 @@ import {SchoolMapService} from '../school-map.service';
 import {Room} from '../room/room';
 
 import {Point} from '../room/point';
+import {SchoolMap} from "../room/map";
 
 
 
@@ -24,13 +25,35 @@ export class SchoolMapComponent implements OnInit {
   private showDirectionBox = false;
   private error = '';
 
-  private schoolMap =  this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR);
+  private schoolMaps = [
+    {name:'1st Floor', map:this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR)},
+    {name:'2nd Floor', map:this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR)}
+    ];
+  private schoolMap:SchoolMap;
+  private floorName: string;
+  private nFloor: number;
 
 
+
+  private setFloor(nFloor:number) {
+    this.schoolMap =  this.schoolMaps[nFloor].map;
+    this.floorName = this.schoolMaps[nFloor].name;
+    this.nFloor = nFloor;
+  }
 
   constructor( private schoolMapService: SchoolMapService ) {
     //   console.log(this.schoolMap[0]);
     //   console.log(this.schoolMap[0].getHeight());
+    this.setFloor(0);
+
+  }
+
+  private changeFloor() {
+    if( this.nFloor === 0) {
+      this.setFloor(1);
+    }else {
+      this.setFloor(0);
+    }
   }
 
   private changeStart(room:Room) {

@@ -1,9 +1,9 @@
 <div>
   <div class="app-header">
     <div class="flex-even app-menu">
-      <div (click)="showDirections()">Directions</div>
+      <div (click)="showDirections()" class="m-l-sm">Directions</div>
       <div (click)="changeFloor()">{{floorName}}<span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></div>
-      <div  (click)="clearRoute()">Clear Route</div>
+      <div  (click)="clearRoute()" class="m-r-sm">Clear Route</div>
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">
       <div class="direction-fields p-l-sm p-t-sm p-r-sm">

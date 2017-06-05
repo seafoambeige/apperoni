@@ -53,7 +53,7 @@ export class SchoolMapService {
         new Room('Main Office', 69, 80, 7, 6,[],'Normal'),
         new Room('Guidance', 90, 57, 12, 12,[],'Normal'),
         new Room('Special Services', 90, 69, 10, 12,[],'Normal'),
-        new Room('Outside', 102, 55, 11, 1,[],'Outside,HideWall-23'),
+        new Room('Outside', 102, 55, 11, 2,[],'Outside,HideWall-23'),
 
 
 

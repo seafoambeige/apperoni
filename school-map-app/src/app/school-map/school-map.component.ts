@@ -121,10 +121,16 @@ export class SchoolMapComponent implements OnInit {
       if( roomType === 'Outside') {
         classes += 'outside-room';
       }
-      const regExp = /(HideWalls-)([1]*)([2]*)([3]*)([4]*)/;
-      if( roomType.match(regExp) ) {
-        classes += 'hide-wall-1';
+      const regExp = /(HideWall-)([1]*)([2]*)([3]*)([4]*)/;
+      const matches = String(roomType).match(regExp);
+      if( matches && matches.length ) {
+        matches.forEach(function (match) {
+          if( match === '1' || match === '2' || match === '3' || match === '4' ) {
+            classes += (' hide-wall-' + match);
+          }
+        });
       }
+
     });
 
 

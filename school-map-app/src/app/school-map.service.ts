@@ -166,6 +166,7 @@ export class SchoolMapService {
 
       return new SchoolMap ('2nd Floor', [
 
+
         new Room('Boys BR', 0, 0, 8, 2,[2,1],'Normal'),
         new Room('girls BR', 0, 2, 8, 2,[2,1],'Normal'),
         new Room('workroom', 0, 4, 8, 5,[2,3],'Normal'),
@@ -186,7 +187,7 @@ export class SchoolMapService {
         new Room('419', 12, 22, 9, 4,[4,4],'Normal'),
         new Room('421', 12, 26, 9, 3,[4,1],'Normal'),
         new Room('storage', 12, 29, 9, 3,[4,4],'Normal'),
-        new Room('stairs', 12, 32, 8, 2,[4,1,4,2],'Normal'),
+        new Room('stairs', 12, 32, 8, 2,[4,1,4,2],'Normal')
 
 
       ]);

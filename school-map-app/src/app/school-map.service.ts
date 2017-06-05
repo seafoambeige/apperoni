@@ -15,6 +15,8 @@ export class SchoolMapService {
     if ( floorNum === SchoolMapService.FIRST_FLOOR ) {
       return new SchoolMap('1st Floor', [
 
+
+
         new Room('mech3', 0, 4, 13, 9,[2,3],'Normal'),
         new Room('receiving', 5, 13, 8, 5,[2,4],'Normal'),
         new Room('kitchen', 2, 18, 11, 10,[3,1],'Normal'),
@@ -159,35 +161,34 @@ export class SchoolMapService {
         new Room('320', 113, 59, 9, 4,[2,4],'Normal'),
         new Room('322', 113, 63, 9, 4,[2,1],'Normal'),
 
-
-
-
       ]);
     }else {
 
       return new SchoolMap ('2nd Floor', [
 
-        new Room('Boys BR', 0, 0, 8, 2,[],'Normal'),
-        new Room('girls BR', 0, 2, 8, 2,[],'Normal'),
-        new Room('workroom', 0, 4, 8, 5,[],'Normal'),
-        new Room('412', 0, 9, 8, 4,[],'Normal'),
-        new Room('414', 0, 12, 8, 4,[],'Normal'),
-        new Room('416', 0, 16, 8, 4,[],'Normal'),
-        new Room('418', 0, 19, 8, 4,[],'Normal'),
-        new Room('420', 0, 22, 8, 4,[],'Normal'),
-        new Room('422', 0, 26, 8, 4,[],'Normal'),
-        new Room('Storage', 0, 30, 8, 3,[],'Normal'),
+        new Room('Boys BR', 0, 0, 8, 2,[2,1],'Normal'),
+        new Room('girls BR', 0, 2, 8, 2,[2,1],'Normal'),
+        new Room('workroom', 0, 4, 8, 5,[2,3],'Normal'),
+        new Room('412', 0, 9, 8, 4,[2,4],'Normal'),
+        new Room('414', 0, 13, 8, 4,[2,1],'Normal'),
+        new Room('416', 0, 17, 8, 4,[2,4],'Normal'),
+        new Room('418', 0, 21, 8, 4,[2,1],'Normal'),
+        new Room('420', 0, 25, 8, 4,[2,4],'Normal'),
+        new Room('422', 0, 29, 8, 4,[2,1],'Normal'),
+        new Room('Storage', 0, 33, 8, 3,[],'Normal'),
 
-        new Room('stairs', 12, 0, 9, 2,[],'Normal'),
-        new Room('Workroom', 12, 2, 9, 5,[],'Normal'),
-        new Room('411', 12, 6, 9, 4,[],'Normal'),
-        new Room('413', 12, 10, 9, 4,[],'Normal'),
-        new Room('415', 12, 14, 9, 4,[],'Normal'),
-        new Room('417', 12, 18, 9, 3,[],'Normal'),
-        new Room('419', 12, 21, 9, 4,[],'Normal'),
-        new Room('421', 12, 25, 9, 3,[],'Normal'),
-        new Room('storage', 12, 28, 9, 3,[],'Normal'),
-        new Room('stairs', 14, 31, 8, 2,[],'Normal'),
+        new Room('stairs', 12, 0, 9, 2,[4,1,4,2],'Normal'),
+        new Room('Workroom', 12, 2, 9, 5,[4,3],'Normal'),
+        new Room('411', 12, 7, 9, 4,[4,4],'Normal'),
+        new Room('413', 12, 11, 9, 4,[4,1],'Normal'),
+        new Room('415', 12, 15, 9, 4,[4,4],'Normal'),
+        new Room('417', 12, 19, 9, 3,[4,1],'Normal'),
+        new Room('419', 12, 22, 9, 4,[4,4],'Normal'),
+        new Room('421', 12, 26, 9, 3,[4,1],'Normal'),
+        new Room('storage', 12, 29, 9, 3,[4,4],'Normal'),
+        new Room('stairs', 12, 32, 8, 2,[4,1,4,2],'Normal'),
+
+
       ]);
     }
 }

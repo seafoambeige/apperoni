@@ -459,7 +459,7 @@ body {
 .door {
   position:absolute;
   border:solid;
-  border-width: 1px;
+  border-width: 3px;
 
 }
 
@@ -469,8 +469,8 @@ body {
 
 .path {
   position:absolute;
-
-
+  margin-top: 2px;
+  margin-left: 2px;
 }
 
 .path-node{

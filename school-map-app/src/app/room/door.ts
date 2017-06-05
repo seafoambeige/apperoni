@@ -10,8 +10,8 @@ export class Door {
 
   constructor(private x: number, private y: number, private face: number) {
     // compensate for border and position on right and bottom faces
-    this.xOffset = (face === 2 ? -1 : 0) ;
-    this.yOffset = (face === 3 ? -1 : 0) ;
+    this.xOffset = (face === 2 ? -2 : 0) ;
+    this.yOffset = (face === 3 ? -2 : 0) ;
   }
   public getTop(zoomFactor: number, offSet: number): string {
     return String((this.y * zoomFactor) + offSet + this.yOffset ) + 'px';

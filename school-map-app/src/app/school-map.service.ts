@@ -15,7 +15,6 @@ export class SchoolMapService {
     if ( floorNum === SchoolMapService.FIRST_FLOOR ) {
       return new SchoolMap('1st Floor', [
 
-
         new Room('mech3', 0, 4, 13, 9,[2,3],'Normal'),
         new Room('receiving', 5, 13, 8, 5,[2,4],'Normal'),
         new Room('kitchen', 2, 18, 11, 10,[3,1],'Normal'),
@@ -52,10 +51,8 @@ export class SchoolMapService {
         new Room('Attendance', 84, 81, 7, 4,[],'Normal'),
         new Room('Main Office', 69, 80, 7, 6,[],'Normal'),
         new Room('Guidance', 90, 57, 12, 12,[],'Normal'),
-        new Room('Special Services', 90, 69, 10, 12,[],'Normal'),
+        new Room('Special Services', 90, 69, 10, 10,[],'Normal'),
         new Room('Outside', 102, 55, 11, 2,[],'Outside,HideWall-23'),
-
-
 
         new Room('Lecture Hall 501', 33, 54, 11, 4,[],'Normal'),
         new Room('Lecture Hall 502', 16, 54, 11, 4,[],'Normal'),
@@ -161,18 +158,6 @@ export class SchoolMapService {
         new Room('318', 113, 55, 9, 4,[2,1],'Normal'),
         new Room('320', 113, 59, 9, 4,[2,4],'Normal'),
         new Room('322', 113, 63, 9, 4,[2,1],'Normal'),
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

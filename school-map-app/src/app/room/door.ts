@@ -3,15 +3,21 @@ import {Point} from './point';
  * Created by sarahhoffman on 5/27/17.
  */
 export class Door {
+  private yOffset:number;
+  private xOffset:number;
+
+
 
   constructor(private x: number, private y: number, private face: number) {
-
+    // compensate for border and position on right and bottom faces
+    this.xOffset = (face === 2 ? -1 : 0) ;
+    this.yOffset = (face === 3 ? -1 : 0) ;
   }
   public getTop(zoomFactor: number, offSet: number): string {
-    return String((this.y * zoomFactor) + offSet ) + 'px';
+    return String((this.y * zoomFactor) + offSet + this.yOffset ) + 'px';
   }
   getLeft(zoomFactor: number, offSet: number): string {
-    return String((this.x * zoomFactor) + offSet ) + 'px';
+    return String((this.x * zoomFactor) + offSet + this.xOffset ) + 'px';
   }
   getHeight(zoomFactor: number): string {
     const tmp = (this.face % 2 ? 0 : 1) * zoomFactor;

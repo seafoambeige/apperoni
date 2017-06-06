@@ -151,7 +151,7 @@ export class SchoolMapService {
           new Room('Courtyard5', 103, 33, 10, 10,[],'Normal'),
           new Room('boys br1', 113, 33, 9, 2,[2,1],'Normal'),
           new Room('girls br1', 113, 35, 9, 2,[2,2],'Normal'),
-          new Room('fake 322', 113, 37, 9, 3,[2,2],'Normal'),
+          new Room('309', 113, 37, 9, 3,[2,2],'Normal'),
           new Room('312', 113, 40, 9, 3,[2,3],'Normal'),
 
           new Room('Courtyard4', 103, 45, 10, 8,[],'Normal'),

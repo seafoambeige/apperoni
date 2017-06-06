@@ -405,10 +405,13 @@ body {
 }
 
 .normal-room{
+   border:solid;
+   border-width: 1px;
+ }
+
+.stair{
   border:solid;
   border-width: 1px;
-
-
 }
 
 .outside-room{

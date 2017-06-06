@@ -29,7 +29,7 @@ private grid: any;
   private _startRoom:Room;
   private _endRoom:Room;
 
-  constructor(public name: string, public rooms: [Room]) {
+  constructor(public name: string, public rooms: [Room], public nFloor:number ) {
     const self = this;
     self.rooms.sort( function(room1, room2){
       if( room1.name.toUpperCase() === room2.name.toUpperCase() ) {
@@ -39,6 +39,7 @@ private grid: any;
     } );
 
     rooms.forEach(function(room){
+      room.nFloor = nFloor;
       if(room.width + room.x > self._width) {
         self._width = room.width + room.x;
       }
@@ -53,54 +54,18 @@ private grid: any;
     rooms.forEach(function(room){
       room.setGrid(self.grid);
     });
-
-
-
-
-
  }
-public setAsStart(roomName: string):Room {
-    const self = this;
-  self._startRoom = null;
-  if( !roomName ) {
-    self._startRoom = null;
-  }
-  self.rooms.forEach(function (Room) {
-    if (Room.name === roomName) {
-      Room.setAsStart(true);
-      self._startRoom = Room;
-    } else {
-      Room.setAsStart(false);
-    }
-  });
-  return self._startRoom;
-}
 
-  public setAsEnd(roomName: string) {
-    const self = this;
-    self._endRoom = null;
-    if( !roomName ) {
-      self._endRoom = null;
-    }
-    self.rooms.forEach(function (Room) {
-      if (Room.name === roomName) {
-        Room.setAsEnd(true);
-        self._endRoom = Room;
-      } else {
-        Room.setAsEnd(false);
-      }
-    });
-    return self._endRoom;
+  public getStairs(): Room[] {
+    return this.rooms.filter(function(room){return room.roomType === 'Stair';});
   }
 
-  public getPath(): Point[] {
+
+  public getPath(startRoom:Room, endRoom:Room): Point[] {
     const self = this;
-    if( self._startRoom == null || self._endRoom == null) {
-      console.log('tried to get path without start or end.');
-      return null;
-    }
-    const startDoors = self._startRoom.doors;
-    const endDoors = self._endRoom.doors;
+
+    const startDoors = startRoom.doors;
+    const endDoors = endRoom.doors;
     if(startDoors.length === 0) {
       console.log('no start doors');
       return [];
@@ -150,6 +115,7 @@ public setAsStart(roomName: string):Room {
     }
     return points;
   }
+
 
 
  /*

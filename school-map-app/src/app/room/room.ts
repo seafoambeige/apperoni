@@ -4,6 +4,13 @@
 import {Door} from './door';
 
 export class Room {
+  get nFloor(): number {
+    return this._nFloor;
+  }
+
+  set nFloor(value: number) {
+    this._nFloor = value;
+  }
   get doors(): Door[] {
     return this._doors;
   }
@@ -22,6 +29,7 @@ export class Room {
     return this._height;
   }
   private start = false;
+  private _nFloor:number;
   private end = false;
   private _doors: Door[] = [];
   static createDoor(face: number, position: number, roomX: number, roomY: number, width: number, height: number): Door {
@@ -44,7 +52,7 @@ export class Room {
     }
     return new Door(x, y, face);
   }
-  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[], private roomType: string) {
+  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[], public roomType: string) {
    /* if(doorInfo.length===0) {
       console.log('door info is 0 for ' + name);
     }*/

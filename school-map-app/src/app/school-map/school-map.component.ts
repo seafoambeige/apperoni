@@ -3,7 +3,7 @@ import {SchoolMapService} from '../school-map.service';
 import {Room} from '../room/room';
 
 import {Point} from '../room/point';
-import {SchoolMap} from "../room/map";
+import {SchoolMap} from '../room/map';
 
 
 
@@ -25,27 +25,28 @@ export class SchoolMapComponent implements OnInit {
   private showDirectionBox = false;
   private error = '';
 
-  private schoolMaps = [
-    {name:'1st Floor', map:this.schoolMapService.getMap(SchoolMapService.FIRST_FLOOR)},
-    {name:'2nd Floor', map:this.schoolMapService.getMap(SchoolMapService.SECOND_FLOOR)}
-    ];
+  private startRoom: Room;
+  private endRoom: Room;
+
+
   private schoolMap:SchoolMap;
   private floorName: string;
   private nFloor: number;
+  private shortestPath:[Point[],Point[]] = [[],[]];  // stores shortest path on each floor by floor num
 
 
 
   private setFloor(nFloor:number) {
-    this.schoolMap =  this.schoolMaps[nFloor].map;
-    this.floorName = this.schoolMaps[nFloor].name;
     this.nFloor = nFloor;
+    this.schoolMap = this.schoolMapService.getMap(nFloor);
+    this.floorName = this.schoolMap.name;
+    this.path = this.shortestPath[this.nFloor];
   }
 
   constructor( private schoolMapService: SchoolMapService ) {
     //   console.log(this.schoolMap[0]);
     //   console.log(this.schoolMap[0].getHeight());
     this.setFloor(0);
-
   }
 
   private changeFloor() {
@@ -56,45 +57,48 @@ export class SchoolMapComponent implements OnInit {
     }
   }
 
+
   private changeStart(room:Room) {
     const self = this;
-    console.log('change start');
-    const validRoom = this.schoolMap.setAsStart(room.name);
-    if( !validRoom ) {
-      self.error = 'Sorry: ' + self.start + ' is not a valid room';
-    }else {
+    if( !room ) {
+      self.error = 'Sorry: you need to select a valid start room. ';
+    } else {
+      this.startRoom= room;
       self.error = '';
     }
-
   }
 
   private changeEnd(room:Room) {
     const self = this;
-    console.log('change end');
-    const validRoom = this.schoolMap.setAsEnd(room.name);
-    if( !validRoom ) {
-      self.error = 'Sorry: ' + self.end + ' is not a valid room';
-    }else {
+    if( !room ) {
+      self.error = 'Sorry: you need to select a valid end room. ';
+    } else {
+      this.endRoom = room;
       self.error = '';
     }
-
   }
   private showPath() {
+    if( !this.startRoom || !this.endRoom ) {
+      this.error = 'You need both a start and end room to find a path';
+    }
     if ( this.error ) {
       return;
     }
-    this.path = this.schoolMap.getPath();
+
+    this.shortestPath = this.schoolMapService.getPath(this.startRoom, this.endRoom);
+    this.path = this.shortestPath[this.nFloor];
     if( this.path && this.path.length ) {
       this.showDirectionBox = false;
     }else {
-      this.error = 'Could not find a path from ' + this.schoolMap.startRoom.name + ' to ' +  this.schoolMap.endRoom.name;
+      this.error = 'Could not find a path from ' + this.startRoom.name + ' to ' +  this.endRoom.name;
     }
   }
 
   private clearRoute() {
     this.path = null;
-    this.schoolMap.setAsStart(null);
-    this.schoolMap.setAsEnd(null);
+    this.shortestPath = [[],[]];
+    this.startRoom = null;
+    this.endRoom = null;
     this.error = '';
   }
 
@@ -121,6 +125,9 @@ export class SchoolMapComponent implements OnInit {
       if( roomType === 'Outside') {
         classes += 'outside-room';
       }
+      if( roomType === 'Stair') {
+        classes += 'stair';
+      }
       const regExp = /(HideWall-)([1]*)([2]*)([3]*)([4]*)/;
       const matches = String(roomType).match(regExp);
       if( matches && matches.length ) {
@@ -135,10 +142,10 @@ export class SchoolMapComponent implements OnInit {
 
 
 
-    if( room.isStart() ) {
+    if( room === this.startRoom ) {
       classes += ' start';
     }
-    if( room.isEnd() ) {
+    if(room === this.endRoom ) {
       classes += ' end';
     }
 

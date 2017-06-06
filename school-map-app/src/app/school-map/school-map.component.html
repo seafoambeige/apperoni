@@ -7,8 +7,8 @@
     </div>
     <div class="direction-box" *ngIf="showDirectionBox">
       <div class="direction-fields p-l-sm p-t-sm p-r-sm">
-        <div class="m-b-xs">Start: <app-room-typeahead [map]="schoolMap"  (onSelectRoom)="changeStart($event)"></app-room-typeahead></div>
-        <div>End: <app-room-typeahead [map]="schoolMap"  (onSelectRoom)="changeEnd($event)"></app-room-typeahead></div>
+        <div class="m-b-xs">Start: <app-room-typeahead   (onSelectRoom)="changeStart($event)"></app-room-typeahead></div>
+        <div>End: <app-room-typeahead (onSelectRoom)="changeEnd($event)"></app-room-typeahead></div>
 
         <div *ngIf="error" class="error">{{ error }}</div>
       </div>
@@ -25,6 +25,7 @@
            [style.left]="room.getLeft(zoomFactor, xOffSet)"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">
         <span [ngClass]="{'big-room-name': room.height > 5, 'small-room-name': room.height <= 5 }"> {{room.name}}</span>
+        <span *ngIf="room.roomType == 'Stair'" (click)="changeFloor()"><span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></span>
       </div>
       <div *ngFor="let door of room.doors">
         <div  [ngClass]="{'door-color': !room.isStart() && !room.isEnd(), 'start' : room.isStart(), 'end' : room.isEnd()}" class="door"

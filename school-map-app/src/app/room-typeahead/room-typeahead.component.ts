@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit, Input, Output, EventEmitter} from '@angul
 import { Http, Response } from '@angular/http';
 
 import {SchoolMap} from '../room/map';
+import {SchoolMapService} from '../school-map.service';
 
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
@@ -24,35 +25,40 @@ import 'rxjs/add/operator/merge';
 
 export class RoomTypeaheadComponent implements OnInit {
 
+  private rooms:any;
   @Input() model: any;
-  @Input() map:SchoolMap;
+
+
 
   @Output() onSelectRoom = new EventEmitter<any>();
+
+
 
   private resultOptionsSubject: Subject<any> = new Subject<any>();
 
   ngOnInit() { }
 
-  constructor() {}
 
-  private getRooms(text)  {
-    return this.map.rooms;
+  constructor(private schoolMapService:SchoolMapService) {
+    this.rooms =  this.schoolMapService.getRooms();
   }
+
+
 
   search = (text$: Observable<string>) =>
     this.resultOptionsSubject.merge(text$.debounceTime(200).map(t=> {return {term:t}} ))
 
       .map(termObj => {
         if(termObj.showAll) {
-          return this.map.rooms.slice();
+          return this.rooms.slice();
         }
         if(termObj.term) {
-          return this.map.rooms.filter(v => new RegExp(termObj.term, 'gi').test(v.name));
+          return this.rooms.filter(v => new RegExp(termObj.term, 'gi').test(v.name));
         }
         return [];
       })
 
-  formatter = x => x.name;
+  formatter = x => x.name + ' ' + (x.nFloor ? '2F' : '1F');
 
   roomSelected(selectedItem:any) {
     this.onSelectRoom.emit(selectedItem.item);

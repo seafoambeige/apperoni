@@ -60,12 +60,22 @@ private grid: any;
     return this.rooms.filter(function(room){return room.roomType === 'Stair';});
   }
 
+  public getRoomByName(roomName): Room {
+    const matches =  this.rooms.filter(function(room){return room.name === roomName;});
+    if( matches.length ) {
+      return matches[0];
+    } else {
+      console.log('Could not find room ' + roomName);
+      return null;
+    }
+  }
+
 
   public getPath(startRoom:Room, endRoom:Room): Point[] {
     const self = this;
 
-    const startDoors = startRoom.doors;
-    const endDoors = endRoom.doors;
+    const startDoors = startRoom.outerRoomName ? this.getRoomByName(startRoom.outerRoomName ).doors :  startRoom.doors;
+    const endDoors =  endRoom.outerRoomName ? this.getRoomByName(endRoom.outerRoomName ).doors :  endRoom.doors;
     if(startDoors.length === 0) {
       console.log('no start doors');
       return [];

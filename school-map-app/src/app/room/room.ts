@@ -52,7 +52,7 @@ export class Room {
     }
     return new Door(x, y, face);
   }
-  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[], public roomType: string) {
+  constructor(public name: string, private _x: number, private _y: number, private _width: number, private _height: number, private doorInfo: number[], public roomType: string, public outerRoomName:string) {
    /* if(doorInfo.length===0) {
       console.log('door info is 0 for ' + name);
     }*/

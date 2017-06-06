@@ -5,6 +5,9 @@ import {Room} from '../room/room';
 import {Point} from '../room/point';
 import {SchoolMap} from '../room/map';
 
+/*declare function  scrollToRoom(): any {
+};*/
+
 
 
 @Component({
@@ -58,6 +61,8 @@ export class SchoolMapComponent implements OnInit {
   }
 
 
+
+
   private changeStart(room:Room) {
     const self = this;
     if( !room ) {
@@ -65,6 +70,7 @@ export class SchoolMapComponent implements OnInit {
     } else {
       this.startRoom= room;
       self.error = '';
+
     }
   }
 

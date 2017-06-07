@@ -18,14 +18,14 @@
 
     </div>
   </div>
-  <div class="map-area" (click)="hideDirections()">
+  <div class="map-area" id="map-area" (click)="hideDirections()">
     <div *ngFor="let room of schoolMap.rooms">
-      <div class="room" [ngClass]="getRoomClass(room)"
+      <div class="room" id={{room.roomId}} [ngClass]="getRoomClass(room)"
            [style.top]="room.getTop(zoomFactor, yOffSet)"
            [style.left]="room.getLeft(zoomFactor, xOffSet)"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">
         <span [ngClass]="{'big-room-name': room.height > 5, 'small-room-name': room.height <= 5 }"> {{room.name}}</span>
-        <span *ngIf="room.roomType == 'Stair'" (click)="changeFloor()"><span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></span>
+        <span *ngIf="room.roomType == 'Stair'" (click)="doStairs(room)"><span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></span>
       </div>
       <div *ngFor="let door of room.doors">
         <div  [ngClass]="{'door-color': !room.isStart() && !room.isEnd(), 'start' : room.isStart(), 'end' : room.isEnd()}" class="door"

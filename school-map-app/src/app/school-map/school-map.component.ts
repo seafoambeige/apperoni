@@ -5,10 +5,8 @@ import {Room} from '../room/room';
 import {Point} from '../room/point';
 import {SchoolMap} from '../room/map';
 
-/*declare function  scrollToRoom(): any {
-};*/
 
-
+declare var $:any;
 
 @Component({
   selector: 'app-school-map',
@@ -61,15 +59,14 @@ export class SchoolMapComponent implements OnInit {
   }
 
 
-
-
   private changeStart(room:Room) {
     const self = this;
     if( !room ) {
       self.error = 'Sorry: you need to select a valid start room. ';
     } else {
       this.startRoom= room;
-      self.error = '';
+      this.setFloor(room.nFloor);
+       self.error = '';
 
     }
   }
@@ -80,7 +77,7 @@ export class SchoolMapComponent implements OnInit {
       self.error = 'Sorry: you need to select a valid end room. ';
     } else {
       this.endRoom = room;
-      self.error = '';
+       self.error = '';
     }
   }
   private showPath() {
@@ -95,9 +92,14 @@ export class SchoolMapComponent implements OnInit {
     this.path = this.shortestPath[this.nFloor];
     if( this.path && this.path.length ) {
       this.showDirectionBox = false;
+      this.scrollToRoom(this.startRoom);
     }else {
       this.error = 'Could not find a path from ' + this.startRoom.name + ' to ' +  this.endRoom.name;
     }
+  }
+
+  private doStairs() {
+    this.changeFloor();
   }
 
   private clearRoute() {
@@ -111,6 +113,16 @@ export class SchoolMapComponent implements OnInit {
   private showDirections() {
     this.showDirectionBox = !this.showDirectionBox;
 
+  }
+
+  private scrollToRoom(room:Room):void {
+ //   const tag = '#' + room.roomId;
+
+
+    $('#map-area').animate({
+      scrollTop: room.getTop(this.zoomFactor,this.yOffSet),
+      scrollLeft: room.getLeft(this.zoomFactor,this.xOffSet)
+    },1000);
   }
 
   private hideDirections() {

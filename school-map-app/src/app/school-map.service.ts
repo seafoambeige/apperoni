@@ -140,7 +140,7 @@ export class SchoolMapService {
           new Room('225', 125, 18, 18, 5,[4,3],'Normal',''),
           new Room('229', 125, 23, 18, 5,[4,2],'Normal',''),
           new Room('231', 125, 28, 18, 5,[4,4],'Normal',''),
-          new Room('stairs1', 125, 33, 10, 2,[4,1,4,2],'Stair',''),
+          new Room('Stairs1', 125, 33, 10, 2,[4,1,4,2],'Stair',''),
           new Room('305', 125, 35, 10, 4,[4,3],'Normal',''),
           new Room('311', 125, 39, 9, 4,[4,4],'Normal',''),
           new Room('313', 125, 43, 9, 4,[4,1],'Normal',''),
@@ -148,7 +148,7 @@ export class SchoolMapService {
           new Room('317', 125, 51, 9, 4,[4,1],'Normal',''),
           new Room('319', 125, 55, 9, 4,[4,4],'Normal',''),
           new Room('321', 125, 59, 9, 4,[4,1],'Normal',''),
-          new Room('stairs2', 125, 64, 9, 3,[4,2,4,1],'Stair',''),
+          new Room('Stairs2', 125, 64, 9, 3,[4,2,4,1],'Stair',''),
 
           new Room('Courtyard5', 103, 33, 10, 10,[],'Normal',''),
           new Room('boys br1', 113, 33, 9, 2,[2,1],'Normal',''),

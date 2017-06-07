@@ -10,7 +10,8 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "lib"
+        "lib",
+        "jquery-3.2.1.min.js"
        ],
       "index": "index.html",
       "main": "main.ts",

@@ -4,9 +4,14 @@
 import {Door} from './door';
 
 export class Room {
+  get roomId(): string {
+    return this._roomId;
+  }
   get nFloor(): number {
     return this._nFloor;
   }
+
+  private _roomId:string;
 
   set nFloor(value: number) {
     this._nFloor = value;
@@ -62,6 +67,7 @@ export class Room {
     for(let i = 0; i<doorInfo.length-1; i+=2) {
       this._doors.push(Room.createDoor(this.doorInfo[i], this.doorInfo[i+1], _x, _y, _width, _height));
     }
+    this._roomId = 'id-' + this.name.replace(/\s/g, '');
  }
 
  getTop(zoomFactor: number, offSet: number): string {

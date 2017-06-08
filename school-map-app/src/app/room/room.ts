@@ -70,6 +70,10 @@ export class Room {
     this._roomId = 'id-' + this.name.replace(/\s/g, '');
  }
 
+ public isNav():boolean {
+     return   Boolean(this.doorInfo.length && this.name) ;
+ }
+
  getTop(zoomFactor: number, offSet: number): string {
     return String((this._y * zoomFactor) + offSet ) + 'px';
  }

@@ -14,6 +14,17 @@ declare var $:any;
   styleUrls: ['./school-map.component.css']
 })
 export class SchoolMapComponent implements OnInit {
+  get showDirectionBox(): boolean {
+    return this._showDirectionBox;
+  }
+
+  get schoolMap(): SchoolMap {
+    return this._schoolMap;
+  }
+
+  get floorName(): string {
+    return this._floorName;
+  }
   // name, x, y, width, height
   private start: string;
   private end: string;
@@ -23,24 +34,24 @@ export class SchoolMapComponent implements OnInit {
   private yOffSet = 50;
 
   private path = [];
-  private showDirectionBox = false;
+  private _showDirectionBox = false;
   private error = '';
 
   private startRoom: Room;
   private endRoom: Room;
 
 
-  private schoolMap:SchoolMap;
-  private floorName: string;
-  private nFloor: number;
+  private _schoolMap:SchoolMap;
+  private _floorName: string;
+  public nFloor: number;
   private shortestPath:[Point[],Point[]] = [[],[]];  // stores shortest path on each floor by floor num
 
 
 
   private setFloor(nFloor:number) {
     this.nFloor = nFloor;
-    this.schoolMap = this.schoolMapService.getMap(nFloor);
-    this.floorName = this.schoolMap.name;
+    this._schoolMap = this.schoolMapService.getMap(nFloor);
+    this._floorName = this._schoolMap.name;
     this.path = this.shortestPath[this.nFloor];
   }
 
@@ -50,7 +61,7 @@ export class SchoolMapComponent implements OnInit {
     this.setFloor(0);
   }
 
-  private changeFloor() {
+  public changeFloor() {
     if( this.nFloor === 0) {
       this.setFloor(1);
     }else {
@@ -80,7 +91,7 @@ export class SchoolMapComponent implements OnInit {
        self.error = '';
     }
   }
-  private showPath() {
+  public showPath() {
     if( !this.startRoom || !this.endRoom ) {
       this.error = 'You need both a start and end room to find a path';
     }
@@ -91,18 +102,18 @@ export class SchoolMapComponent implements OnInit {
     this.shortestPath = this.schoolMapService.getPath(this.startRoom, this.endRoom);
     this.path = this.shortestPath[this.nFloor];
     if( this.path && this.path.length ) {
-      this.showDirectionBox = false;
+      this._showDirectionBox = false;
       this.scrollToRoom(this.startRoom);
     }else {
       this.error = 'Could not find a path from ' + this.startRoom.name + ' to ' +  this.endRoom.name;
     }
   }
 
-  private doStairs() {
+  public doStairs() {
     this.changeFloor();
   }
 
-  private clearRoute() {
+  public clearRoute() {
     this.path = null;
     this.shortestPath = [[],[]];
     this.startRoom = null;
@@ -110,8 +121,8 @@ export class SchoolMapComponent implements OnInit {
     this.error = '';
   }
 
-  private showDirections() {
-    this.showDirectionBox = !this.showDirectionBox;
+  public showDirections() {
+    this._showDirectionBox = !this._showDirectionBox;
 
   }
 
@@ -125,8 +136,8 @@ export class SchoolMapComponent implements OnInit {
     },1000);
   }
 
-  private hideDirections() {
-    this.showDirectionBox = false;
+  public hideDirections() {
+    this._showDirectionBox = false;
   }
 
   private getRoomClass(room) {

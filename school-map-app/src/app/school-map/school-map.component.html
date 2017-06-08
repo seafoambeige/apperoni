@@ -24,7 +24,7 @@
            [style.top]="room.getTop(zoomFactor, yOffSet)"
            [style.left]="room.getLeft(zoomFactor, xOffSet)"
            [style.height]="room.getHeight(zoomFactor)" [style.width]="room.getWidth(zoomFactor)">
-        <span [ngClass]="{'big-room-name': room.height > 5, 'small-room-name': room.height <= 5 }"> {{room.name}}</span>
+        <span [ngClass]="{'big-room-name': room.height > 5, 'small-room-name': room.height <= 5 }" *ngIf="room.roomType.indexOf('Outside') == -1 "> {{room.name}}</span>
         <span *ngIf="room.roomType == 'Stair'" (click)="doStairs(room)"><span class="m-l-sm fa" [ngClass]=" nFloor ? 'fa-arrow-circle-down' : 'fa-arrow-circle-up'"></span></span>
       </div>
       <div *ngFor="let door of room.doors">

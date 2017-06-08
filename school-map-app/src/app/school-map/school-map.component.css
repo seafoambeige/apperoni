@@ -6,7 +6,6 @@
 body {
   font-family: "Lato Regular";
   font-size: 14px;
-
 }
 
 
@@ -401,6 +400,7 @@ body {
   position:absolute;
   font-size:14px;
   text-align:center;
+  line-height:1;
 }
 
 .normal-room{

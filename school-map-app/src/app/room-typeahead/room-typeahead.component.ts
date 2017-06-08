@@ -40,7 +40,9 @@ export class RoomTypeaheadComponent implements OnInit {
 
 
   constructor(private schoolMapService:SchoolMapService) {
-    this.rooms =  this.schoolMapService.getRooms();
+    this.rooms =  this.schoolMapService.getRooms().filter(function(room){
+      return room.roomType.indexOf('Outside') === -1 && room.isNav();  // don't return outside rooms
+    });
   }
 
 
